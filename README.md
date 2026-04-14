@@ -11,6 +11,7 @@ YouTube Attribution & Performance-Tracking-Plattform für Content Creator. Zeigt
 | Ordner | Inhalt |
 |---|---|
 | [`briefings/`](./briefings/) | High-Level-Briefings für neue Integratoren (z.B. wie man einen KI-Skill an trak.studio anbindet) |
+| [`mcp.md`](./mcp.md) | Model Context Protocol Server — 1-Click-Integration in Claude / Cursor / VS Code |
 | [`api/`](./api/) | Detaillierte REST-API-Referenz pro Endpoint |
 | [`guides/`](./guides/) | Tutorials: Getting Started, Authentication, typische Workflows |
 
