@@ -51,13 +51,13 @@ Die REST-API funktioniert aus jedem Claude-Tool via HTTP. Zusätzlich existiert 
 
 ## Contributing
 
-Feedback, Bugs oder Feature-Requests? Öffne ein [Issue](https://github.com/ypsum/trak-studio-docs/issues) oder schreib direkt an `mail@ypsummedia.de`.
+Feedback, Bugs oder Feature-Requests? Öffne ein [Issue](https://github.com/ypsum/trak-studio-docs/issues) oder schreib direkt an `support@trak.studio`.
 
 ## Security
 
 - Keine Credentials im Repo (CI-Check mit [gitleaks](https://github.com/gitleaks/gitleaks))
 - Beispiel-Keys sind immer Platzhalter: `trak_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
-- Für Security-relevante Findings: `mail@ypsummedia.de`
+- Für Security-relevante Findings: `support@trak.studio`
 
 ## Lizenz
 

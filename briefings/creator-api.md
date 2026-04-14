@@ -490,8 +490,7 @@ Damit du weißt wo die Grenzen sind:
 
 ## Kontakt / Fragen
 
-- Technischer Ansprechpartner: Canay (mail@ypsummedia.de / mail@trak.studio)
-- Spec-Dokument (detailliert): `docs/superpowers/specs/2026-04-14-creator-api-design.md` im trak-studio Repo
-- Implementation-Plan: `docs/superpowers/plans/2026-04-14-creator-api.md`
+- Technischer Ansprechpartner: `support@trak.studio`
+- Docs-Repo: https://github.com/ypsum/trak-studio-docs
 
 **Feedback erwünscht:** Wenn ein Endpunkt fehlt, ein Response-Feld unklar ist, oder ein Use Case nicht abgedeckt — sag Bescheid, wir ergänzen das in Phase 2.
