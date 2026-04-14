@@ -1,0 +1,21 @@
+# gitleaks config — prevents committing real trak.studio API keys
+# Install: brew install gitleaks
+# Run:     gitleaks detect --source=. --config=.gitleaks.toml
+
+title = "trak.studio docs gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "trak-studio-api-key"
+description = "Real trak.studio API key (trak_ followed by 32 hex chars or UUID format)"
+regex = '''trak_(?:[a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'''
+tags = ["secret", "trak-studio"]
+
+[allowlist]
+description = "Allow placeholder keys"
+regexes = [
+  '''trak_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx''',
+  '''trak_test_\w+''',
+]

@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Temp
+*.tmp
+*.bak
+
+# Secrets (defense in depth — gitleaks is primary defense)
+.env
+.env.local
+*.key
+*.pem
+secrets/
