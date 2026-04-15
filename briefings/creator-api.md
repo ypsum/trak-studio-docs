@@ -254,6 +254,56 @@ Wichtig wenn du prüfen willst: war bei Performance-Snapshot X der ursprünglich
 
 Liste aller verbundenen Kanäle des Kunden.
 
+**Response:**
+```json
+{
+  "channels": [
+    {
+      "id": "a04213c3-...",
+      "platform": "youtube",
+      "platform_user_id": "UCcP4e8Wop4wEPWagYTiouqQ",
+      "platform_username": "Ruth Biallowons",
+      "url": "https://youtube.com/channel/UCcP4e8Wop4wEPWagYTiouqQ",
+      "profile_image_url": "...",
+      "subscriber_count": 117000,
+      "status": "active",
+      "last_synced_at": "2026-04-15T08:00:00Z",
+      "owner": {
+        "user_id": "0144cb7a-...",
+        "name": "Ruth Biallowons",
+        "slug": "ruth-biallowons"
+      }
+    }
+  ]
+}
+```
+
+**Felder pro Kanal:**
+- `url` — Deep-link zum Kanal
+  - YouTube: `https://youtube.com/channel/{platform_user_id}`
+  - Instagram: `https://instagram.com/{platform_username}`
+  - Spotify: `https://open.spotify.com/artist/{platform_user_id}`
+- `owner` — wer besitzt diesen Kanal
+  - `user_id` (UUID)
+  - `name` (z.B. `"Ruth Biallowons"`)
+  - `slug` (z.B. `"ruth-biallowons"` — auto-generiert aus `name`, case-insensitive, umlaut-aware, non-alphanumeric → dash)
+
+### Agency / Multi-Account Access
+
+Wenn der auth-User via `team_members` Zugriff auf Kunden-Accounts hat (role=`owner`/`agency`/`viewer`, status=`active`), enthält die Response automatisch auch alle Kanäle dieser Kunden. Jeder Kanal trägt sein `owner`-Feld, damit der KI-Client (Claude, Cursor, etc.) aus Prompts wie "Zeig Ruths Videos" den richtigen Kanal über `owner.slug = "ruth-biallowons"` identifizieren kann.
+
+**Beispiel:** Agency-User verbindet einmal mit Claude. `list_channels` liefert:
+- Eigene Kanäle (`owner.slug = "ypsum"`)
+- Ruth's 2 YouTube-Kanäle (`owner.slug = "ruth-biallowons"`)
+- Sven's Kanal (`owner.slug = "sven-strenger"`)
+- etc.
+
+Keine separate Verbindung pro Kunde nötig. Skaliert auf beliebig viele verbundene Klienten.
+
+**Scope pro Endpoint:**
+- **Reads** (list_videos, get_video, get_performance, get_retention_curve, get_title_history, list_channels, get_baselines, top_performers, list_ab_tests, get_ab_test) — Union aus eigenem Account + alle accessiblen Kunden.
+- **Writes + Briefings** (create_briefing, update_briefing, list_briefings, get_briefing) — bleiben Agency-private. Agency kann Briefings in **ihrem eigenen Account** erstellen und via `linked_video_id` auf Kunden-Videos verlinken — aber nicht Briefings unter Kunden-Account schreiben (Phase-1-Scope).
+
 ### GET /v1/channels/:id/baselines
 
 Rolling 30d Baseline für einen Kanal.
